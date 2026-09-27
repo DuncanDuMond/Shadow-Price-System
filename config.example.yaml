@@ -1,0 +1,14 @@
+# YAML is optional: install PyYAML, then use the same schema as config.example.json.
+# The JSON example is intentionally complete. Anchor values are null by design;
+# they must be replaced with verified values and source URLs before a run.
+run_mode: research
+storage:
+  sqlite_path: data/tdv_metals.sqlite3
+  cache_dir: cache
+data:
+  providers: {}
+  instruments: []
+  monetary_base_provider: null
+shadow_model:
+  aggregation: mean
+  anchors: {}

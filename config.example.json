@@ -1,0 +1,37 @@
+{
+  "run_mode": "research",
+  "storage": {"sqlite_path": "data/tdv_metals.sqlite3", "cache_dir": "cache", "cache_ttl_minutes": 120},
+  "data": {
+    "providers": {
+      "gold_csv": {"kind": "csv", "path": "data/gold.csv"},
+      "silver_csv": {"kind": "csv", "path": "data/silver.csv"},
+      "copper_csv": {"kind": "csv", "path": "data/copper.csv"},
+      "money_csv": {"kind": "csv", "path": "data/monetary_base.csv"},
+      "dxy_csv": {"kind": "csv", "path": "data/dxy.csv"},
+      "real_yield_csv": {"kind": "csv", "path": "data/real_yield.csv"}
+    },
+    "instruments": [
+      {"symbol": "GOLD", "provider": "gold_csv", "contract_multiplier": 100, "asset_class": "precious"},
+      {"symbol": "SILVER", "provider": "silver_csv", "contract_multiplier": 5000, "asset_class": "precious"},
+      {"symbol": "COPPER", "provider": "copper_csv", "contract_multiplier": 25000, "asset_class": "industrial"}
+    ],
+    "monetary_base_provider": "money_csv",
+    "macro": {"dxy_provider": "dxy_csv", "real_yield_provider": "real_yield_csv", "missing_policy": "neutral"}
+  },
+  "shadow_model": {
+    "aggregation": "mean",
+    "anchors": {
+      "GOLD": [
+        {"id": "fed_foundation", "label": "Fill with verified anchor", "base_date": "1913-12-31", "base_monetary_base": null, "base_metal_price": null, "source_url": "https://example.org/replace", "validated": false},
+        {"id": "bretton_woods", "label": "Fill with verified anchor", "base_date": "1945-12-31", "base_monetary_base": null, "base_metal_price": null, "source_url": "https://example.org/replace", "validated": false}
+      ],
+      "SILVER": [],
+      "COPPER": []
+    }
+  },
+  "indicators": {"fib_bb_window": 34, "atr_period": 14, "relative_strength_window": 34},
+  "advanced_indicators": {"shadow_lookback": 120, "volume_lookback": 20, "profile_lookback": 40, "profile_bins": 24, "ssl_length": 20, "impulse_length": 34, "ribbon_periods": [8, 13, 21, 34, 55], "qqe_enabled": false},
+  "market_context": {"market24_url": "https://market24hclock.com/", "calendars": {}, "contexts": []},
+  "strategy": {"long_score": 65, "strong_long_score": 75, "short_score": 35, "strong_short_score": 25, "entry_gap": 0.10, "confirmation_count": 2, "atr_stop_multiple": 2.0, "risk_fraction": 0.005, "starting_equity": 100000, "max_contracts": 10, "require_macro_confirmation": false, "max_paper_signal_age_days": 3.0},
+  "api": {"host": "127.0.0.1", "port": 8000}
+}
