@@ -1,0 +1,3 @@
+[console_scripts]
+shadow-price-system = tdv_metals.cli:main
+tdv-metals = tdv_metals.cli:main
