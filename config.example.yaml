@@ -12,3 +12,9 @@ data:
 shadow_model:
   aggregation: mean
   anchors: {}
+tradingview:
+  enabled: true
+  symbols:
+    GOLD: "COMEX:GC1!"
+    SILVER: "COMEX:SI1!"
+    COPPER: "COMEX:HG1!"
