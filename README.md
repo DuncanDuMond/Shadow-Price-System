@@ -1,4 +1,4 @@
-# Shadow Price System 2.1
+# Shadow Price System 2.2
 
 A configurable Python research agent for gold, silver and copper. It ingests OHLCV and monetary/macro series, computes a TDV-style shadow benchmark, ranks the metals, produces deterministic long/short/flat decisions, backtests them, and serves a dashboard and API. It has **no broker integration or order execution**.
 
@@ -20,7 +20,7 @@ Python 3.10+ is required for the core. From this directory:
     Copy-Item config.example.json config.json
     shadow-price-system --config config.json serve
 
-Open <http://127.0.0.1:8000/> for the dashboard or <http://127.0.0.1:8000/docs> for interactive API documentation. The invalid-by-design example config can serve the synthetic demo, while /health reports configuration_error until real anchors and providers are filled in. The API defaults to localhost.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) for the dashboard or /docs for interactive API documentation. The invalid-by-design example config can serve the synthetic demo, while /health reports configuration_error until real anchors and providers are filled in. The API defaults to localhost.
 
 For real research:
 
@@ -59,6 +59,14 @@ The existing indicators remain: Fibonacci Bollinger Bands, both Fibonacci MACDs 
 | QQE MOD | Experimental approximation, **off by default**, diagnostic only; excluded from SVS and entry gates. |
 
 Signals require a completed bar. The dashboard distinguishes research data from the synthetic demo and shows score, chart, evidence, provenance and session status.
+
+## TradingView and Trecker-aligned interface
+
+The dashboard now has a responsive, original Trecker-aligned layout: overview cards, model chart, external market lens, session context and evidence. It does **not** bundle or claim to be the Trecker Framer source project. [Trecker](https://www.framer.com/marketplace/templates/trecker/) is a free remix with a limited license; to publish an actual Framer site, remix it in your own account and follow [the handoff guide](docs/FRAMER_HANDOFF.md). Tradeboard is deferred until you decide to license it.
+
+TradingView's [Advanced Chart widget](https://www.tradingview.com/widget-docs/widgets/charts/advanced-chart/) is available only after a deliberate “Load external chart” click. No TradingView script or iframe is loaded when the dashboard opens. The chart displays the selected gold/silver/copper symbol, preserves TradingView branding and has a remove control. Loading it connects the visitor's browser to TradingView. Configure or disable it with `tradingview.enabled` and `tradingview.symbols` (or `TDV__TRADINGVIEW__ENABLED` / `TDV__TRADINGVIEW__SYMBOLS`). The examples use TradingView's COMEX continuous futures symbols; validate contract, venue, adjustment, quote delay and data entitlement against your own provider before visual comparison. The widget is **never** an ingestion adapter, a score input, a backtest input or a trade trigger. It cannot run this system's custom indicators inside the widget; those remain in the model/evidence views.
+
+`GET /api/chart-config` returns the approved display mapping and the no-execution boundary for agents and the browser. Symbol values must use `EXCHANGE:SYMBOL`; unsupported or malformed mappings fail configuration loading. There are no TradingView credentials and no broker connections.
 
 ## Market 24h Clock integration
 
@@ -116,6 +124,7 @@ For backtests, finalized-bar features fill at the **next** bar's open, ATR stops
 | /api/refresh, /api/signals/latest, /api/signals/{symbol} | Refresh and read ranked research observations |
 | /api/evidence/{symbol} | Score decomposition, advanced features, quality statuses and anchor provenance |
 | /api/market-context, /api/market-context/{symbol} | Exchange status versus indicative regional context |
+| /api/chart-config | Approved presentation-only TradingView symbols and load policy |
 | /api/backtests/{symbol} | Historical simulation with metrics and trade ledger |
 | shadow-price-system --config config.json mcp-serve | Optional read-only MCP v2 stdio tools for agent hosts |
 
@@ -150,4 +159,3 @@ VectorBT returns a **cash-equity proxy**, not futures P&L. Portfolio optimizers 
     tests/                                 offline unit and integration tests
 
 Run python -m unittest discover -s tests -v or python -m pytest. Third-party optional adapters are unit-tested against substitute APIs in the base environment; run their real integration checks after installing and configuring those packages. No live broker path has been implemented or tested.
-# Shadow-Price-System
