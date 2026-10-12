@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from tdv_metals.config import settings_from_dict
+from tdv_metals.config import ConfigError, settings_from_dict
 from tdv_metals.dashboard import dashboard_html
 from tdv_metals.data import DataError, normalize_ohlcv
 from tdv_metals.demo import synthetic_demo
@@ -39,6 +39,21 @@ class ProductSurfaceTests(unittest.TestCase):
         self.assertIn('href="https://market24hclock.com/"', html)
         self.assertNotIn("<iframe", html)
         self.assertIn("SYNTHETIC DEMO", html)
+        self.assertIn("Trecker-aligned", html)
+        self.assertIn("TradingView chart", html)
+        self.assertIn("Load external chart", html)
+        self.assertIn("embed-widget-advanced-chart.js", html)
+        self.assertNotIn('<script src="https://s3.tradingview.com', html)
+
+    def test_tradingview_display_symbols_are_validated(self) -> None:
+        raw = {"data": {"providers": {}, "instruments": [], "monetary_base_provider": None},
+               "shadow_model": {"anchors": {}},
+               "tradingview": {"enabled": True, "symbols": {
+                   "GOLD": "COMEX:GC1!", "SILVER": "COMEX:SI1!", "COPPER": "COMEX:HG1!"}}}
+        self.assertEqual(settings_from_dict(raw).tradingview.symbols["GOLD"], "COMEX:GC1!")
+        raw["tradingview"]["symbols"]["GOLD"] = "https://attacker.invalid/x"
+        with self.assertRaises(ConfigError):
+            settings_from_dict(raw)
 
     def test_context_is_distinct_from_exchange_eligibility(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
