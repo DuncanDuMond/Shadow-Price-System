@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
@@ -148,6 +149,28 @@ class MarketContextConfig:
     market24_url: str = "https://market24hclock.com/"
 
 
+_TV_SYMBOL = re.compile(r"^[A-Z0-9_]+:[A-Z0-9_.!]+$")
+
+
+@dataclass(frozen=True)
+class TradingViewConfig:
+    """Presentation-only symbols; never an OHLCV or signal provider."""
+
+    enabled: bool = True
+    symbols: dict[str, str] = field(default_factory=lambda: {
+        "GOLD": "COMEX:GC1!", "SILVER": "COMEX:SI1!", "COPPER": "COMEX:HG1!",
+    })
+
+    def validate(self) -> None:
+        if type(self.enabled) is not bool:
+            raise ConfigError("tradingview.enabled must be a boolean")
+        if set(self.symbols) != {"GOLD", "SILVER", "COPPER"}:
+            raise ConfigError("tradingview.symbols must map GOLD, SILVER, and COPPER")
+        if any(not isinstance(value, str) or not _TV_SYMBOL.fullmatch(value)
+               for value in self.symbols.values()):
+            raise ConfigError("tradingview symbols must use EXCHANGE:SYMBOL format")
+
+
 @dataclass(frozen=True)
 class Settings:
     run_mode: RunMode
@@ -159,8 +182,10 @@ class Settings:
     strategy: StrategyConfig = field(default_factory=StrategyConfig)
     api: ApiConfig = field(default_factory=ApiConfig)
     market_context: MarketContextConfig = field(default_factory=MarketContextConfig)
+    tradingview: TradingViewConfig = field(default_factory=TradingViewConfig)
 
     def validate_for_analysis(self) -> None:
+        self.tradingview.validate()
         if self.run_mode not in ("research", "paper"):
             raise ConfigError("run_mode must be research or paper; live execution is intentionally unsupported")
         symbols = [item.symbol for item in self.data.instruments]
@@ -287,6 +312,17 @@ def settings_from_dict(raw: dict[str, Any]) -> Settings:
             contexts=tuple(ContextConfig.from_dict(value) for value in market_raw.get("contexts", [])),
             market24_url=str(market_raw.get("market24_url", "https://market24hclock.com/")),
         )
+        tradingview_raw = raw.get("tradingview", {})
+        if not isinstance(tradingview_raw, dict):
+            raise ConfigError("tradingview must be an object")
+        display_symbols = tradingview_raw.get("symbols", TradingViewConfig().symbols)
+        if not isinstance(display_symbols, dict):
+            raise ConfigError("tradingview.symbols must be an object")
+        tradingview = TradingViewConfig(
+            enabled=tradingview_raw.get("enabled", True),
+            symbols={str(key).upper(): value for key, value in display_symbols.items()},
+        )
+        tradingview.validate()
         advanced_raw = dict(raw.get("advanced_indicators", {}))
         if "ribbon_periods" in advanced_raw:
             advanced_raw["ribbon_periods"] = tuple(advanced_raw["ribbon_periods"])
@@ -297,6 +333,7 @@ def settings_from_dict(raw: dict[str, Any]) -> Settings:
             advanced_indicators=AdvancedIndicatorConfig(**advanced_raw),
             strategy=StrategyConfig(**raw.get("strategy", {})),
             api=ApiConfig(**raw.get("api", {})), market_context=market_context,
+            tradingview=tradingview,
         )
     except (KeyError, TypeError, ValueError) as exc:
         raise ConfigError(f"invalid configuration: {exc}") from exc
