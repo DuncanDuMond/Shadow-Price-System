@@ -19,7 +19,7 @@ Trecker is the chosen Framer template for the first public web presence. Tradebo
 | Market context | Verified exchange calendar status; Market24h link is supplementary |
 | CTA | Open secured research workspace or read methodology |
 
-The live chart and model chart must be labeled separately: TradingView may show a continuous futures contract, while the system may analyze another provider, contract, roll policy, adjustment or bar close. Never use visual proximity as evidence of identical data.
+The live chart and model chart must be labeled separately: the supplied TradingView defaults show TVC-calculated gold/silver and IG copper, while the system may analyze futures from another provider, contract, roll policy, adjustment or bar close. Never use visual proximity as evidence of identical data.
 
 ## Before publishing
 
