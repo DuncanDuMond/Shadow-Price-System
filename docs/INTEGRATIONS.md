@@ -24,3 +24,7 @@ Neither deferred repository is presented as installed or integrated. The built-i
 ## Market24hClock
 
 [Market24hClock](https://market24hclock.com/) is an external regional-session reference in the dashboard and API. It is not a data provider or exchange calendar. Its [copyright policy](https://market24hclock.com/Copyright-Policy) allows credited direct links but restricts copying/embedding its clock. A verified contract-specific exchange schedule should come from the exchange, such as [CME's official trading-hours page](https://www.cmegroup.com/trading-hours.html). Session context cannot turn a closed or unverified futures calendar into an eligible paper entry.
+
+## TradingView charts
+
+The dashboard uses the official Advanced Chart embed as an optional external visual surface. Users choose Gold, Silver or Copper, then explicitly load the widget. The supplied display symbols are `TVC:GOLD`, `TVC:SILVER` and `IG:COPPER`; the first two are TradingView-calculated TVC data rather than this project's futures data. The supplied Bollinger Bands, Ichimoku Cloud, Williams %R, ATR and RSI study IDs are display settings only. The `STD;Willams_R` spelling is retained from the user's embed snippet and should be visually checked in TradingView. Neither widget prices nor study outputs are ingested, cached, scored or backtested.
