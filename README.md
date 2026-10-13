@@ -1,4 +1,4 @@
-# Shadow Price System 2.2
+# Shadow Price System 2.3
 
 A configurable Python research agent for gold, silver and copper. It ingests OHLCV and monetary/macro series, computes a TDV-style shadow benchmark, ranks the metals, produces deterministic long/short/flat decisions, backtests them, and serves a dashboard and API. It has **no broker integration or order execution**.
 
@@ -20,7 +20,7 @@ Python 3.10+ is required for the core. From this directory:
     Copy-Item config.example.json config.json
     shadow-price-system --config config.json serve
 
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) for the dashboard or /docs for interactive API documentation. The invalid-by-design example config can serve the synthetic demo, while /health reports configuration_error until real anchors and providers are filled in. The API defaults to localhost.
+Open the [dashboard](http://127.0.0.1:8000/) or [the API docs](/docs) for interactive API documentation. The invalid-by-design example config can serve the synthetic demo, while /health reports configuration_error until real anchors and providers are filled in. The API defaults to localhost.
 
 For real research:
 
@@ -64,9 +64,9 @@ Signals require a completed bar. The dashboard distinguishes research data from 
 
 The dashboard now has a responsive, original Trecker-aligned layout: overview cards, model chart, external market lens, session context and evidence. It does **not** bundle or claim to be the Trecker Framer source project. [Trecker](https://www.framer.com/marketplace/templates/trecker/) is a free remix with a limited license; to publish an actual Framer site, remix it in your own account and follow [the handoff guide](docs/FRAMER_HANDOFF.md). Tradeboard is deferred until you decide to license it.
 
-TradingView's [Advanced Chart widget](https://www.tradingview.com/widget-docs/widgets/charts/advanced-chart/) is available only after a deliberate “Load external chart” click. No TradingView script or iframe is loaded when the dashboard opens. The chart displays the selected gold/silver/copper symbol, preserves TradingView branding and has a remove control. Loading it connects the visitor's browser to TradingView. Configure or disable it with `tradingview.enabled` and `tradingview.symbols` (or `TDV__TRADINGVIEW__ENABLED` / `TDV__TRADINGVIEW__SYMBOLS`). The examples use TradingView's COMEX continuous futures symbols; validate contract, venue, adjustment, quote delay and data entitlement against your own provider before visual comparison. The widget is **never** an ingestion adapter, a score input, a backtest input or a trade trigger. It cannot run this system's custom indicators inside the widget; those remain in the model/evidence views.
+TradingView's [Advanced Chart widget](https://www.tradingview.com/widget-docs/widgets/charts/advanced-chart/) is available only after a deliberate “Load external chart” click. Choose Gold, Silver or Copper independently of the model chart; no TradingView script or iframe is loaded when the dashboard opens. The chart preserves TradingView attribution and has a remove control. Loading it connects the visitor's browser to TradingView. The supplied defaults are `TVC:GOLD`, `TVC:SILVER`, and `IG:COPPER`, with Bollinger Bands, Ichimoku Cloud, Williams %R, ATR, and RSI study IDs copied from the supplied widget snippets. TradingView [identifies TVC as calculated data](https://www.tradingview.com/support/solutions/43000709178-what-does-tvc-stand-for-in-the-instrument-ticker/), so these are **not** interchangeable with the system's futures input prices or volume. The supplied `STD;Willams_R` study ID retains TradingView's snippet spelling; verify that study visually after loading, since its rendering is controlled by TradingView. Configure or disable the display with `tradingview.enabled`, `tradingview.symbols`, and `tradingview.studies` (or corresponding `TDV__TRADINGVIEW__...` environment overrides). Validate contract, venue, adjustment, quote delay and data entitlement against your own provider before visual comparison. The widget is **never** an ingestion adapter, a score input, a backtest input or a trade trigger. Its built-in studies do not replace this system's independently calculated indicators.
 
-`GET /api/chart-config` returns the approved display mapping and the no-execution boundary for agents and the browser. Symbol values must use `EXCHANGE:SYMBOL`; unsupported or malformed mappings fail configuration loading. There are no TradingView credentials and no broker connections.
+`GET /api/chart-config` returns the approved display mapping, study IDs and no-execution boundary for agents and the browser. Symbol values must use `EXCHANGE:SYMBOL`; malformed mappings and study IDs fail configuration loading. There are no TradingView credentials and no broker connections.
 
 ## Market 24h Clock integration
 
