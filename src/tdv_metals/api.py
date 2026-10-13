@@ -20,7 +20,7 @@ def create_app(config_path: str | Path = "config.json") -> Any:
     settings = load_settings(config_path)
     service = ResearchService(settings)
     app = FastAPI(
-        title="Shadow Price System API", version="2.2.0",
+        title="Shadow Price System API", version="2.3.0",
         description="Explainable metals research and paper signals only. No broker order execution.",
     )
 
@@ -33,10 +33,10 @@ def create_app(config_path: str | Path = "config.json") -> Any:
         try:
             settings.validate_for_analysis()
             return {"status": "ok", "name": "Shadow Price System", "mode": settings.run_mode,
-                    "execution": "disabled", "version": "2.2.0"}
+                    "execution": "disabled", "version": "2.3.0"}
         except ConfigError as exc:
             return {"status": "configuration_error", "name": "Shadow Price System",
-                    "detail": str(exc), "execution": "disabled", "version": "2.2.0"}
+                    "detail": str(exc), "execution": "disabled", "version": "2.3.0"}
 
     @app.get("/api/status")
     def status() -> dict[str, object]:
@@ -49,7 +49,7 @@ def create_app(config_path: str | Path = "config.json") -> Any:
     @app.get("/api/capabilities")
     def capabilities() -> dict[str, object]:
         return {
-            "name": "Shadow Price System", "version": "2.2.0", "modes": ["research", "paper"],
+            "name": "Shadow Price System", "version": "2.3.0", "modes": ["research", "paper"],
             "broker_execution": False, "read_only_agent_surface": True,
             "resources": ["/api/signals/latest", "/api/evidence/{symbol}",
                           "/api/market-context/{symbol}", "/api/demo", "/api/chart-config"],
@@ -64,6 +64,7 @@ def create_app(config_path: str | Path = "config.json") -> Any:
         return {
             "provider": "TradingView", "enabled": settings.tradingview.enabled,
             "symbols": settings.tradingview.symbols,
+            "studies": settings.tradingview.studies,
             "purpose": "optional external visualization only; not a model data source",
             "requires_user_action": True,
         }
