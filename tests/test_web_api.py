@@ -40,7 +40,9 @@ class WebApiTests(unittest.TestCase):
                 self.assertFalse(capabilities["broker_execution"])
                 chart_config = client.get("/api/chart-config").json()
                 self.assertTrue(chart_config["requires_user_action"])
-                self.assertEqual(chart_config["symbols"]["GOLD"], "COMEX:GC1!")
+                self.assertEqual(chart_config["symbols"], {
+                    "GOLD": "TVC:GOLD", "SILVER": "TVC:SILVER", "COPPER": "IG:COPPER"})
+                self.assertIn("STD;RSI", chart_config["studies"])
                 self.assertIn("not a model data source", chart_config["purpose"])
                 demo = client.get("/api/demo").json()
                 self.assertTrue(demo["synthetic_data"])
