@@ -42,8 +42,22 @@ class ProductSurfaceTests(unittest.TestCase):
         self.assertIn("Trecker-aligned", html)
         self.assertIn("TradingView chart", html)
         self.assertIn("Load external chart", html)
+        self.assertIn('data-tv="GOLD"', html)
+        self.assertIn('data-tv="SILVER"', html)
+        self.assertIn('data-tv="COPPER"', html)
+        self.assertIn("tradingview-widget-copyright", html)
         self.assertIn("embed-widget-advanced-chart.js", html)
         self.assertNotIn('<script src="https://s3.tradingview.com', html)
+
+    def test_supplied_tradingview_widget_defaults(self) -> None:
+        settings = settings_from_dict({"data": {"providers": {}, "instruments": [],
+                                               "monetary_base_provider": None},
+                                       "shadow_model": {"anchors": {}}})
+        self.assertEqual(settings.tradingview.symbols, {
+            "GOLD": "TVC:GOLD", "SILVER": "TVC:SILVER", "COPPER": "IG:COPPER"})
+        self.assertEqual(settings.tradingview.studies, (
+            "STD;Bollinger_Bands", "STD;Ichimoku%1Cloud", "STD;Willams_R",
+            "STD;Average_True_Range", "STD;RSI"))
 
     def test_tradingview_display_symbols_are_validated(self) -> None:
         raw = {"data": {"providers": {}, "instruments": [], "monetary_base_provider": None},
@@ -52,6 +66,15 @@ class ProductSurfaceTests(unittest.TestCase):
                    "GOLD": "COMEX:GC1!", "SILVER": "COMEX:SI1!", "COPPER": "COMEX:HG1!"}}}
         self.assertEqual(settings_from_dict(raw).tradingview.symbols["GOLD"], "COMEX:GC1!")
         raw["tradingview"]["symbols"]["GOLD"] = "https://attacker.invalid/x"
+        with self.assertRaises(ConfigError):
+            settings_from_dict(raw)
+
+    def test_tradingview_study_ids_are_validated(self) -> None:
+        raw = {"data": {"providers": {}, "instruments": [], "monetary_base_provider": None},
+               "shadow_model": {"anchors": {}},
+               "tradingview": {"studies": ["STD;RSI"]}}
+        self.assertEqual(settings_from_dict(raw).tradingview.studies, ("STD;RSI",))
+        raw["tradingview"]["studies"] = ["STD;RSI", "</script>"]
         with self.assertRaises(ConfigError):
             settings_from_dict(raw)
 
