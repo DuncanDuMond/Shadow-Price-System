@@ -150,6 +150,7 @@ class MarketContextConfig:
 
 
 _TV_SYMBOL = re.compile(r"^[A-Z0-9_]+:[A-Z0-9_.!]+$")
+_TV_STUDY = re.compile(r"^STD;[A-Za-z0-9_%]+$")
 
 
 @dataclass(frozen=True)
@@ -158,8 +159,12 @@ class TradingViewConfig:
 
     enabled: bool = True
     symbols: dict[str, str] = field(default_factory=lambda: {
-        "GOLD": "COMEX:GC1!", "SILVER": "COMEX:SI1!", "COPPER": "COMEX:HG1!",
+        "GOLD": "TVC:GOLD", "SILVER": "TVC:SILVER", "COPPER": "IG:COPPER",
     })
+    studies: tuple[str, ...] = (
+        "STD;Bollinger_Bands", "STD;Ichimoku%1Cloud", "STD;Willams_R",
+        "STD;Average_True_Range", "STD;RSI",
+    )
 
     def validate(self) -> None:
         if type(self.enabled) is not bool:
@@ -169,6 +174,11 @@ class TradingViewConfig:
         if any(not isinstance(value, str) or not _TV_SYMBOL.fullmatch(value)
                for value in self.symbols.values()):
             raise ConfigError("tradingview symbols must use EXCHANGE:SYMBOL format")
+        if len(self.studies) > 10 or any(
+            not isinstance(study, str) or not _TV_STUDY.fullmatch(study)
+            for study in self.studies
+        ):
+            raise ConfigError("tradingview.studies must contain at most 10 STD; study IDs")
 
 
 @dataclass(frozen=True)
@@ -318,9 +328,13 @@ def settings_from_dict(raw: dict[str, Any]) -> Settings:
         display_symbols = tradingview_raw.get("symbols", TradingViewConfig().symbols)
         if not isinstance(display_symbols, dict):
             raise ConfigError("tradingview.symbols must be an object")
+        display_studies = tradingview_raw.get("studies", TradingViewConfig().studies)
+        if not isinstance(display_studies, (list, tuple)):
+            raise ConfigError("tradingview.studies must be an array")
         tradingview = TradingViewConfig(
             enabled=tradingview_raw.get("enabled", True),
             symbols={str(key).upper(): value for key, value in display_symbols.items()},
+            studies=tuple(display_studies),
         )
         tradingview.validate()
         advanced_raw = dict(raw.get("advanced_indicators", {}))
