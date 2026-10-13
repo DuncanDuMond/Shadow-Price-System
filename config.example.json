@@ -32,7 +32,7 @@
   "indicators": {"fib_bb_window": 34, "atr_period": 14, "relative_strength_window": 34},
   "advanced_indicators": {"shadow_lookback": 120, "volume_lookback": 20, "profile_lookback": 40, "profile_bins": 24, "ssl_length": 20, "impulse_length": 34, "ribbon_periods": [8, 13, 21, 34, 55], "qqe_enabled": false},
   "market_context": {"market24_url": "https://market24hclock.com/", "calendars": {}, "contexts": []},
-  "tradingview": {"enabled": true, "symbols": {"GOLD": "COMEX:GC1!", "SILVER": "COMEX:SI1!", "COPPER": "COMEX:HG1!"}},
+  "tradingview": {"enabled": true, "symbols": {"GOLD": "TVC:GOLD", "SILVER": "TVC:SILVER", "COPPER": "IG:COPPER"}, "studies": ["STD;Bollinger_Bands", "STD;Ichimoku%1Cloud", "STD;Willams_R", "STD;Average_True_Range", "STD;RSI"]},
   "strategy": {"long_score": 65, "strong_long_score": 75, "short_score": 35, "strong_short_score": 25, "entry_gap": 0.10, "confirmation_count": 2, "atr_stop_multiple": 2.0, "risk_fraction": 0.005, "starting_equity": 100000, "max_contracts": 10, "require_macro_confirmation": false, "max_paper_signal_age_days": 3.0},
   "api": {"host": "127.0.0.1", "port": 8000}
 }
