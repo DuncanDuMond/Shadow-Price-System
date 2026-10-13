@@ -15,6 +15,12 @@ shadow_model:
 tradingview:
   enabled: true
   symbols:
-    GOLD: "COMEX:GC1!"
-    SILVER: "COMEX:SI1!"
-    COPPER: "COMEX:HG1!"
+    GOLD: "TVC:GOLD"
+    SILVER: "TVC:SILVER"
+    COPPER: "IG:COPPER"
+  studies:
+    - "STD;Bollinger_Bands"
+    - "STD;Ichimoku%1Cloud"
+    - "STD;Willams_R"
+    - "STD;Average_True_Range"
+    - "STD;RSI"
