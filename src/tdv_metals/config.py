@@ -9,6 +9,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 from typing import Any, Literal
+from urllib.parse import urlsplit
 
 from .advanced_indicators import AdvancedIndicatorConfig
 from .sessions import CalendarConfig, ContextConfig
@@ -78,6 +79,11 @@ class Anchor:
 
     def valid(self) -> bool:
         try:
+            source = urlsplit(self.source_url)
+            valid_source = source.scheme in {"http", "https"} and bool(source.hostname)
+        except (TypeError, ValueError):
+            valid_source = False
+        try:
             date.fromisoformat(self.base_date)
             valid_date = True
         except ValueError:
@@ -89,7 +95,7 @@ class Anchor:
             and math.isfinite(self.base_monetary_base) and self.base_monetary_base > 0
             and self.base_metal_price is not None
             and math.isfinite(self.base_metal_price) and self.base_metal_price > 0
-            and self.source_url.startswith(("https://", "http://"))
+            and valid_source
             and "example.org/replace" not in self.source_url
         )
 
