@@ -1,0 +1,9 @@
+name: shadow-price
+version: 1.0.0
+description: Research-only gold, silver and copper shadow-price analyst using the Shadow Price System.
+author: DuncanDuMond
+license: MIT
+distribution_owned:
+  - SOUL.md
+  - skills
+  - distribution.yaml

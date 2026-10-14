@@ -130,6 +130,20 @@ For backtests, finalized-bar features fill at the **next** bar's open, ATR stops
 
 No API or MCP tool places or cancels an order. An agent should treat the score as a research rank, check blockers, freshness and entry_eligible_now, and never interpret it as a return forecast.
 
+### Hermes agent profile
+
+Install the research-only `shadow-price` profile from `agents/shadow-price`:
+
+    hermes profile install agents/shadow-price --name shadow-price -y
+
+Then choose a model, restrict its toolsets and connect the local MCP server as
+described in [the Hermes setup guide](docs/HERMES_AGENT.md). The distribution
+contains no credentials, schedules or market data and does not change your default
+profile. Its five MCP tools include `calculate_shadow_price`, a stateless calculator
+that reuses the existing anchor formula with explicit supplied values, units,
+dates and provenance. Inputs are labeled as not independently verified; it does
+not silently fetch quotes, verify sources, convert units or execute trades.
+
 ## Optional GitHub ecosystem
 
 All bridges are lazy and **not vendored**. Install only what you use:
