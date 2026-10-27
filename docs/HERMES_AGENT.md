@@ -163,9 +163,12 @@ Initial inspected repository commit: `207f3998995c6bb2bf91d54e3f642aa5da974e8e`.
 The manifest's MIT label follows `pyproject.toml`; no third-party implementation
 was copied. Hermes setup was checked against the installed CLI and official docs:
 
-- https://hermes-agent.nousresearch.com/docs/user-guide/profiles
-- https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions
-- https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference
+- [Hermes profiles](https://hermes-agent.nousresearch.com/docs/user-guide/profiles)
+- [Hermes profile distributions](https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions)
+- [Hermes MCP configuration reference](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference)
+- [Hermes MCP configuration reference](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference)
+- [Hermes MCP configuration reference](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference)
+- [Hermes MCP configuration](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference)
 
 No fresh commodity quotes or independently verified historical monetary anchors
 were acquired as part of profile installation. Real-market calculations remain
