@@ -27,10 +27,10 @@ model-owner approval; it is not presented as a homogeneous market-price series.*
 | --- | --- | ---: | --- | ---: | --- |
 | Gold | 1913 | $20.67/troy oz | Official parity reported by USGS [1] | 3.417 [5] | Unvalidated |
 | Gold | 1945 | $35.00/troy oz | Official parity reported by USGS [1] | 41.851 [5] | Unvalidated |
-| Silver | 1913 | approximately $0.609628/troy oz | Derived from USGS nominal annual unit value [2][4] | 3.417 [5] | Unvalidated |
-| Silver | 1945 | approximately $0.519428/troy oz | Derived from USGS nominal annual unit value [2][4] | 41.851 [5] | Unvalidated |
-| Copper | 1913 | approximately $0.155129/lb | Derived from USGS nominal annual unit value [3][4] | 3.417 [5] | Unvalidated |
-| Copper | 1945 | approximately $0.120202/lb | Derived from USGS nominal annual unit value [3][4] | 41.851 [5] | Unvalidated |
+| Silver | 1913 | approximately $0.609628/troy oz | Derived from USGS nominal annual unit value (sources 2 and 4) | 3.417 [5] | Unvalidated |
+| Silver | 1945 | approximately $0.519428/troy oz | Derived from USGS nominal annual unit value [2, 4] | 41.851 [5] | Unvalidated |
+| Copper | 1913 | approximately $0.155129/lb | Derived from USGS nominal annual unit value (sources 3 and 4) | 3.417 [5] | Unvalidated |
+| Copper | 1945 | approximately $0.120202/lb | Derived from USGS nominal annual unit value (sources 3 and 4) | 41.851 [5] | Unvalidated |
 
 The JSON preserves exact decimal conversion results for reproducibility, **not**
 additional precision in the rounded source prices. Rounded prior estimates such
@@ -64,7 +64,7 @@ prices of $20.67 for 1900–32 and $35.00 for 1935–70 in its conversion note. 
 unit-value note separately describes average world market gold prices for
 1900–67.[1] Thus $20.67 is **not** the conversion of cell G19, nor is $35.00 the
 conversion of G51. Silver unit values and U.S. producer copper prices are also
-not exchange-specific futures settlements.[2][3][12]
+not exchange-specific futures settlements (sources 2 and 3; see also source 12).
 
 Workbook SHA-256 digests, URLs, selected row quotations and conversion provenance
 are retained in [`historical_sources.json`](../research/historical_sources.json).
@@ -82,7 +82,7 @@ the Revolution to the First Iraq War* (2015), Tables 4 and 5, reports:[5]
 | 1945 | 41.851 | Currency plus bank deposits at the Federal Reserve |
 
 These are the **high-powered-money** columns, not the adjacent M2 values 15.73
-and 126.63. The paper cites Friedman and Schwartz (1982), Table 4.8.[5][6]
+and 126.63. The paper cites Friedman and Schwartz (1982), Table 4.8.&#91;5&#93;&#91;6&#93;
 
 The working paper provides year-labelled observations, not verified founding-day,
 December 31, or explicitly recovered weighted-calendar-year balances. The
@@ -95,7 +95,7 @@ Modern BOGMBASE is monthly, not seasonally adjusted, in billions of dollars; its
 retrieved range begins in January 1959. It therefore does not directly contain
 1913 or 1945 observations.[7] Its definition is currency in circulation plus
 reserve balances; H.6 describes currency outside Treasury/Federal Reserve Banks
-and depository institutions' reserve-account balances.[7][11] Shared currency
+and depository institutions' reserve-account balances (sources 7 and 11). Shared currency
 units do not establish identical historical coverage or period weighting.
 
 **Activation blockers:** recover the historical monetary-base averaging/source
