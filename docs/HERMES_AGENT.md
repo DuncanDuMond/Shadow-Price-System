@@ -50,7 +50,7 @@ hermes -p shadow-price config set terminal.cwd C:/path/to/Shadow-Price-System
 hermes -p shadow-price mcp add shadow_price --command C:/path/to/Shadow-Price-System/.venv/Scripts/python.exe --args -m tdv_metals.cli --config C:/path/to/Shadow-Price-System/config.example.json mcp-serve
 ```
 
-Confirm the five discovered tools at the CLI prompt. On POSIX replace the Python
+Confirm the six discovered tools at the CLI prompt. On POSIX replace the Python
 executable path with `/absolute/path/to/Shadow-Price-System/.venv/bin/python`.
 The example configuration supports the stateless calculator and demo but **cannot
 produce real research snapshots** until anchors and data providers are supplied.
@@ -85,6 +85,7 @@ or schedule a Bot Mode routine.
 | `signal_evidence` | Persisted score components, features, quality and provenance |
 | `market_context` | Configured exchange state; `UNKNOWN` does not confirm eligibility |
 | `synthetic_walkthrough` | Explicitly synthetic demonstration; never live market data |
+| `integration_status` | Local optional-package metadata and Qlib deferral; no SDK imports or provider calls |
 
 The host may add a server prefix to these names. The agent discovers exact names.
 Tools do not place/cancel orders, fetch providers or write backtests. Web retrieval,
@@ -134,6 +135,16 @@ completed-bar state, and exchange eligibility. Snapshot creation time alone does
 not establish freshness. Rankings do not predict returns or authorize trades.
 
 ## Maintenance and verification
+
+Distribution 1.1.0 adds [historical anchor research](HISTORICAL_ANCHORS.md) and
+[optional integration guidance](INTEGRATIONS.md). All six historical candidates
+remain unvalidated: their source values do not establish a comparable monetary-
+base splice or exact dates. They are not loaded into active config. Riskfolio and
+OpenBB remain opt-in; Nautilus is an offline bar-conversion bridge, not a trading
+engine. Qlib remains deferred until a concrete ML research objective is defined.
+`integration_status` only inspects local distribution metadata; the restricted
+profile cannot install packages, fetch through OpenBB or run allocation/engine
+workflows through that tool.
 
 ```text
 python -m unittest discover -s tests -v

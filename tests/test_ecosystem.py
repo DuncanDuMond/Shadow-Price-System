@@ -41,6 +41,16 @@ def returns() -> pd.DataFrame:
 
 
 class EcosystemTests(unittest.TestCase):
+    def test_openbb_accepts_current_to_dataframe_response(self) -> None:
+        raw = bars().rename(columns={"timestamp": "date"})
+        response = SimpleNamespace(to_dataframe=lambda: raw, warnings=None, provider="fixture")
+        client = SimpleNamespace(derivatives=SimpleNamespace(
+            futures=SimpleNamespace(historical=lambda **kwargs: response)
+        ))
+        provider = OpenBBFuturesProvider("fixture", {"GOLD": "GCZ26"}, "2026-12", client=client)
+        actual = provider.fetch(DataRequest("GOLD"))
+        self.assertEqual(actual["close"].tolist(), raw["close"].tolist())
+
     def test_integrity_catches_impossible_candle_and_duplicate_timestamp(self) -> None:
         frame = bars()
         frame.loc[0, "high"] = 99.0

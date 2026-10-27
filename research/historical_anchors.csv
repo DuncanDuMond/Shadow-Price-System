@@ -1,0 +1,7 @@
+id,symbol,observation_year,base_date,base_monetary_base,monetary_base_unit,proposed_metal_price,metal_price_unit,proposed_price_basis,validated
+GOLD-1913,GOLD,1913,,3.417,"USD billions, nominal",20.67,USD per troy ounce,OFFICIAL_GOLD_PARITY,False
+GOLD-1945,GOLD,1945,,41.851,"USD billions, nominal",35.0,USD per troy ounce,OFFICIAL_GOLD_PARITY,False
+SILVER-1913,SILVER,1913,,3.417,"USD billions, nominal",0.60962814528,USD per troy ounce,USGS_NOMINAL_ANNUAL_UNIT_VALUE,False
+SILVER-1945,SILVER,1945,,41.851,"USD billions, nominal",0.51942806256,USD per troy ounce,USGS_NOMINAL_ANNUAL_UNIT_VALUE,False
+COPPER-1913,COPPER,1913,,3.417,"USD billions, nominal",0.15512859054,USD per pound,USGS_NOMINAL_ANNUAL_UNIT_VALUE,False
+COPPER-1945,COPPER,1945,,41.851,"USD billions, nominal",0.12020197805,USD per pound,USGS_NOMINAL_ANNUAL_UNIT_VALUE,False

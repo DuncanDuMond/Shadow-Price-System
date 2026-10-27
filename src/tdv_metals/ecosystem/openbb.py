@@ -56,7 +56,8 @@ class OpenBBFuturesProvider:
             query["end_date"] = request.end
         try:
             response = client.derivatives.futures.historical(**query)
-            raw = response.to_df()
+            converter = getattr(response, "to_dataframe", None)
+            raw = converter() if callable(converter) else response.to_df()
         except Exception as exc:
             raise DataError(f"OpenBB futures fetch failed for {request.name}: {exc}") from exc
         if getattr(response, "warnings", None):

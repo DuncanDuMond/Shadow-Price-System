@@ -1,0 +1,243 @@
+{
+  "schema": "shadow-historical-research/v1",
+  "retrieved_on": "2026-10-27",
+  "research_only": true,
+  "activation_allowed": false,
+  "not_a_runtime_config": true,
+  "current_prices_or_shadow_valuations_supplied": false,
+  "model_unchanged": true,
+  "price_convention": "Gold proposes official parity; silver/copper propose USGS nominal annual unit values. This mixed convention is explicit, provisional and not validated.",
+  "candidates": [
+    {
+      "id": "GOLD-1913",
+      "symbol": "GOLD",
+      "observation_year": 1913,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 3.417,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency alone; the paper explicitly distinguishes 1913 from currency plus bank deposits at the Federal Reserve from 1914 onward.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 20.67,
+      "metal_price_unit": "USD per troy ounce",
+      "proposed_price_basis": "OFFICIAL_GOLD_PARITY",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 608000,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A19",
+        "value_cell": "G19",
+        "converted_price_decimal": "18.9109138944000",
+        "conversion_formula": "usd_per_metric_ton * 31.1034768 / 1000000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote.",
+        "Official gold parity differs from the USGS annual nominal unit-value series; the proposed parity convention requires explicit model approval."
+      ]
+    },
+    {
+      "id": "GOLD-1945",
+      "symbol": "GOLD",
+      "observation_year": 1945,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 41.851,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency plus bank deposits at the Federal Reserve.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 35.0,
+      "metal_price_unit": "USD per troy ounce",
+      "proposed_price_basis": "OFFICIAL_GOLD_PARITY",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 1120000,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A51",
+        "value_cell": "G51",
+        "converted_price_decimal": "34.8358940160000",
+        "conversion_formula": "usd_per_metric_ton * 31.1034768 / 1000000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote.",
+        "Official gold parity differs from the USGS annual nominal unit-value series; the proposed parity convention requires explicit model approval."
+      ]
+    },
+    {
+      "id": "SILVER-1913",
+      "symbol": "SILVER",
+      "observation_year": 1913,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 3.417,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency alone; the paper explicitly distinguishes 1913 from currency plus bank deposits at the Federal Reserve from 1914 onward.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 0.60962814528,
+      "metal_price_unit": "USD per troy ounce",
+      "proposed_price_basis": "USGS_NOMINAL_ANNUAL_UNIT_VALUE",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 19600,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A19",
+        "value_cell": "J19",
+        "converted_price_decimal": "0.6096281452800",
+        "conversion_formula": "usd_per_metric_ton * 31.1034768 / 1000000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote."
+      ]
+    },
+    {
+      "id": "SILVER-1945",
+      "symbol": "SILVER",
+      "observation_year": 1945,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 41.851,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency plus bank deposits at the Federal Reserve.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 0.51942806256,
+      "metal_price_unit": "USD per troy ounce",
+      "proposed_price_basis": "USGS_NOMINAL_ANNUAL_UNIT_VALUE",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 16700,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A51",
+        "value_cell": "J51",
+        "converted_price_decimal": "0.5194280625600",
+        "conversion_formula": "usd_per_metric_ton * 31.1034768 / 1000000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote."
+      ]
+    },
+    {
+      "id": "COPPER-1913",
+      "symbol": "COPPER",
+      "observation_year": 1913,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 3.417,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency alone; the paper explicitly distinguishes 1913 from currency plus bank deposits at the Federal Reserve from 1914 onward.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 0.15512859054,
+      "metal_price_unit": "USD per pound",
+      "proposed_price_basis": "USGS_NOMINAL_ANNUAL_UNIT_VALUE",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 342,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A19",
+        "value_cell": "K19",
+        "converted_price_decimal": "0.15512859054",
+        "conversion_formula": "usd_per_metric_ton * 0.45359237 / 1000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote."
+      ]
+    },
+    {
+      "id": "COPPER-1945",
+      "symbol": "COPPER",
+      "observation_year": 1945,
+      "base_date": null,
+      "validated": false,
+      "source_value_verified": true,
+      "base_monetary_base": 41.851,
+      "monetary_base_unit": "USD billions, nominal",
+      "monetary_base_definition": "Currency plus bank deposits at the Federal Reserve.",
+      "monetary_base_period": "Year-labelled observation; exact averaging convention unverified",
+      "proposed_metal_price": 0.12020197805,
+      "metal_price_unit": "USD per pound",
+      "proposed_price_basis": "USGS_NOMINAL_ANNUAL_UNIT_VALUE",
+      "usgs_unit_value": {
+        "nominal_usd_per_metric_ton": 265,
+        "sheet_path": "xl/worksheets/sheet1.xml",
+        "year_cell": "A51",
+        "value_cell": "K51",
+        "converted_price_decimal": "0.12020197805",
+        "conversion_formula": "usd_per_metric_ton * 0.45359237 / 1000",
+        "source_precision_note": "Unit conversion does not improve the precision of rounded USGS inputs."
+      },
+      "source_ids": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "validation_blockers": [
+        "Exact high-powered-money averaging dates and weights are unverified.",
+        "Historical currency/reserve definitions are not reconciled with modern BOGMBASE.",
+        "No sourced, tested historical-to-modern monetary-base splice exists.",
+        "The annual price observation is not an event-day or futures-settlement quote."
+      ]
+    }
+  ],
+  "unresolved": [
+    "Original Friedman/Schwartz PDF was retrieved, but rotated table pages yield badly garbled pdftotext output; no readable high-powered-money source-note confirmation.",
+    "pdftoppm unavailable. A task-local PyMuPDF installation attempt timed out; no installed package was relied on.",
+    "No original underlying monthly observations or gold reserve-ratio rules acquired; no inferred daily/event-date base values.",
+    "No current monetary-base observation, licensed market-data feed or futures-settlement dataset was validated.",
+    "No eligible dated web-archive receipt was acquired; these are current retrievals of historical documents, not point-in-time backtest evidence."
+  ]
+}

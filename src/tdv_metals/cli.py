@@ -30,6 +30,7 @@ def _parser() -> argparse.ArgumentParser:
     actions = parser.add_subparsers(dest="command", required=True)
     actions.add_parser("validate-config", help="validate a configuration without accessing providers")
     actions.add_parser("demo", help="show a clearly labeled synthetic walkthrough; no configuration needed")
+    actions.add_parser("integrations", help="inspect optional package metadata without fetching data")
     refresh = actions.add_parser("refresh", help="fetch/cache data and produce signals")
     refresh.add_argument("--force", action="store_true", help="bypass local provider cache")
     backtest = actions.add_parser("backtest", help="run next-open historical backtest")
@@ -58,6 +59,10 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "demo":
             print(json.dumps(synthetic_demo(), default=str, indent=2, allow_nan=False))
+            return 0
+        if args.command == "integrations":
+            from .ecosystem.status import integration_status
+            print(json.dumps(integration_status(), indent=2, allow_nan=False))
             return 0
         settings = load_settings(Path(args.config))
         if args.command == "validate-config":
