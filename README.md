@@ -42,6 +42,11 @@ The shadow benchmark is an auditable **TDV-style model**, not a claim to reprodu
 
 The example's 1913/1945 labels do **not** supply purported historical values. Each anchor needs positive, unit-compatible values, a source URL, and validated: true. If an exact authoritative methodology is available later, implement it as a separate model rather than relabeling this one.
 
+[Historical anchor research](docs/HISTORICAL_ANCHORS.md) records six cited 1913/1945
+candidates and exact unit conversions. They remain **unvalidated and inactive**:
+historical monetary-base dates/definitions and a modern-series splice are unresolved.
+The JSON/CSV research tables are not runtime configuration and supply no live valuation.
+
 The 0–100 Shadow Valuation Score (SVS) has visible components: valuation 40, Fibonacci Bollinger gap extremity 20, ATR-normalized Fibonacci MACD 15, canonical-shift Ichimoku 10, Williams %R recovery/failure 10, and synchronized cross-metal relative strength 5. Macro confirmation is a visible decision gate, not a hidden score adjustment. The new indicators add evidence and confirmations without silently changing SVS calibration.
 
 Long/short entries require a thresholded SVS, a shadow-gap discount/premium, and independent evidence categories. Fibonacci and Impulse MACD share one momentum category; Ichimoku, SSL Hybrid and EMA ribbon share one trend category. Williams timing, volume participation, and DXY/real-yield macro confirmation are separate categories. This avoids counting correlated lines as independent votes. Output includes blockers, confirmations and ATR-based futures sizing using the configured contract multiplier. If the risk budget cannot fund one contract, the action is ABSTAIN, not a fractional future.
@@ -139,10 +144,12 @@ Install the research-only `shadow-price` profile from `agents/shadow-price`:
 Then choose a model, restrict its toolsets and connect the local MCP server as
 described in [the Hermes setup guide](docs/HERMES_AGENT.md). The distribution
 contains no credentials, schedules or market data and does not change your default
-profile. Its five MCP tools include `calculate_shadow_price`, a stateless calculator
+profile. Its six MCP tools include `calculate_shadow_price`, a stateless calculator
 that reuses the existing anchor formula with explicit supplied values, units,
 dates and provenance. Inputs are labeled as not independently verified; it does
 not silently fetch quotes, verify sources, convert units or execute trades.
+`integration_status` reports local optional-package metadata without importing SDKs
+or contacting providers; package presence is not a verified integration.
 
 ## Optional GitHub ecosystem
 
@@ -150,7 +157,14 @@ All bridges are lazy and **not vendored**. Install only what you use:
 
     python -m pip install -e ".[contracts,openbb,research,allocation,riskfolio,monitoring,agent]"
 
-The research extra (VectorBT) requires Python 3.11+. Confirm each dependency's license and vendor data rights before commercial deployment; notably, OpenBB and VectorBT have terms to review. See [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) for repository links, exact commands, boundaries and deferred Qlib/NautilusTrader work.
+The research extra (VectorBT) requires Python 3.11+. NautilusTrader is a separate
+`nautilus` extra pinned to 1.231.0 (Python 3.12–3.14): **offline bar conversion only**,
+not its trading engine or a new backtester. Qlib remains deferred until a concrete
+ML research objective is defined. Confirm each installed version's license and
+vendor data rights; see [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) for commands,
+pinned source references and boundaries. No optional SDK is installed automatically.
+
+    shadow-price-system integrations
 
     shadow-price-system --config config.json validate-data GOLD --pandera
     shadow-price-system --config config.json research-sweep GOLD

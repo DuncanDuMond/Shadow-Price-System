@@ -1,0 +1,137 @@
+{
+  "schema": "shadow-research-sources/v1",
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/ds140-gold-2022.xlsx",
+      "title": "gold workbook",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "A19=1913 | B19=135 | C19=NA | D19=63.6 | E19=70.3 | F19=69 | G19=608000 | H19=10000000 | I19=694",
+        "A51=1945 | B51=29.7 | C51=NA | D51=83.2 | E51=176 | F51=124 | G51=1120000 | H51=10100000 | I51=762",
+        "The official troy ounce gold prices used for the conversion were set by the U.S. Congress at $20.67 for 1900–32, $25.56 for 1933, $34.95 for 1934, and $35.00 for 1935–70.",
+        "Unit values were estimated using average world market gold price for 1900–67 and the Englehard’s average gold price quotation of refined gold for 1968 to current year as reported in the MP91 and the MYB."
+      ],
+      "sha256": "025f3eb98adb606cc214b82caa70646b80cf9debdf6544dbafce361283c1c480",
+      "landing_url": "https://www.usgs.gov/media/files/gold-historical-statistics-data-series-140"
+    },
+    {
+      "id": 2,
+      "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/ds140-silver-2021.xlsx",
+      "title": "silver workbook",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "A19=1913 | B19=2210 | C19=2080 | D19=245 | E19=NA | F19=NA | G19=NA | H19=NA | I19=719.3611346547126 | J19=19600 | K19=323000 | L19=7010",
+        "A51=1945 | B51=903 | C51=904 | D51=1820 | E51=NA | F51=604 | G51=4190 | H51=NA | I51=3930 | J51=16700 | K51=152000 | L51=5040"
+      ],
+      "sha256": "e57b952a5fd469291341bf275fbaa1c20dfd0caa9b40f383a2a19076efa9e997",
+      "landing_url": "https://www.usgs.gov/media/files/silver-historical-statistics-data-series-140"
+    },
+    {
+      "id": 3,
+      "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/ds140-copper-2020.xlsx",
+      "title": "copper workbook",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "A19=1913 | B19=733000 | C19=83000 | D19=41000 | E19=17000 | F19=136000 | G19=371000 | H19=41000 | I19=521000 | J19=588000 | K19=342 | L19=5630 | M19=996000",
+        "A51=1945 | B51=1010000 | C51=451000 | D51=462000 | E51=92000 | F51=482000 | G51=44000 | H51=740000 | I51=1250000 | J51=1650000 | K51=265 | L51=2410 | M51=2110000",
+        "Unit value is estimated as the “Annual Average U.S. Producer Copper Price,” reported in the MP98 and the MYB."
+      ],
+      "sha256": "8c5e3682ceae94a06146c4b5000c4499521b02fcbd7dda5954e9ac4eb17ffc3f",
+      "landing_url": "https://www.usgs.gov/media/files/copper-historical-statistics-data-series-140"
+    },
+    {
+      "id": 4,
+      "url": "https://www.nist.gov/system/files/documents/2025/12/30/appc-26-HB44-20251222.docx",
+      "title": "NIST Handbook44 AppendixC conversion tables",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "1 troy ounce (oz t)= | 480 | 24 | 20 | 17.554 29",
+        "1 troy ounce (oz t)= | 8 | 1.097 143 | 1 | 0.083 333 333",
+        "1 troy ounce (oz t)= | 0.068 571 43 | 31 103.476 8 | 31.103 476 8 | 0.031 103 476 8",
+        "1 avoirdupois   pound (lb)= | 1 | 453 592.37 | 453.592 37 | 0.453 592 37",
+        "1 pound, avoirdupois (lb) | 7 000 grains (exactly)1.215 troy or apothecaries pounds453.592 37 grams (exactly)"
+      ]
+    },
+    {
+      "id": 5,
+      "url": "https://www.nber.org/system/files/working_papers/w21221/w21221.pdf",
+      "title": "nber",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "High-powered money (monetary base) is currency in 1913 and currency plus bank deposits at the Federal Reserve from 1914 on.",
+        "1945 41.851 126.63 130 129 157 2.62",
+        "High-powered money (monetary base) is currency plus bank deposits at the Federal Reserve.",
+        "Sources: High-powered money, Money, and NNP deflator, Friedman and Schwartz (1982, Table 4.8).",
+        "Table 4. Money, Prices, and Interest Rates in World War I\n\n1913  High-       Total Stock  Cost of  GDP                NNP       Long-term\n      powered     of Money,    living   deflator           deflator  Interest rate,\n      Money       M2                                                 government\n      (Billions)  (Billions)       100       100              100    bonds\n\n         3.417        15.73                                               4.74"
+      ]
+    },
+    {
+      "id": 6,
+      "url": "https://www.nber.org/system/files/chapters/c11404/c11404.pdf",
+      "title": "Friedman and Schwartz (1982), The Basic Data",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "The basic series as well as a series for high-powered money are given in the appendix to this chapter (sec. 4.4), which also gives detailed references to sources.",
+        "All annual averages are centered on 30 June."
+      ]
+    },
+    {
+      "id": 7,
+      "url": "https://fred.stlouisfed.org/data/BOGMBASE",
+      "title": "fred",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "1959-01-01 to 2026-08-01",
+        "The monetary base equals currency in circulation plus reserve balances."
+      ]
+    },
+    {
+      "id": 8,
+      "url": "https://www.federalreservehistory.org/essays/feds-formative-years",
+      "title": "fed",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "President Woodrow Wilson signed the Federal Reserve Act on December 23, 1913.",
+        "The Banks opened for business on November 16, 1914."
+      ]
+    },
+    {
+      "id": 9,
+      "url": "https://www.imf.org/external/np/exr/center/mm/eng/cc_sub_4.htm",
+      "title": "imf",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "Woods: July 1-22, 1944"
+      ]
+    },
+    {
+      "id": 10,
+      "url": "https://www.imf.org/en/publications/articles-of-agreement/issues/2016/12/30/articles-of-agreement-of-the-international-monetary-fund-adopted-at-the-united-nations-357",
+      "title": "imf_articles",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "Entered into force December 27, 1945."
+      ]
+    },
+    {
+      "id": 11,
+      "url": "https://www.federalreserve.gov/releases/h6/current/default.htm",
+      "title": "h6",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "Currency in circulation consists of Federal Reserve notes and coin outside the U.S. Treasury and Federal Reserve Banks.",
+        "Reserve balances are balances held by depository institutions in master accounts and excess balance accounts at Federal Reserve Banks."
+      ]
+    },
+    {
+      "id": 12,
+      "url": "https://www.cmegroup.com/market-data/daily-settlements.html",
+      "title": "cme",
+      "accessed": "2026-10-27",
+      "quotes": [
+        "Settlement prices are used to mark traders’ positions to market daily, determining profits or losses."
+      ]
+    }
+  ]
+}

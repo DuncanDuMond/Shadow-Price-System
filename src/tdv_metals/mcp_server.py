@@ -26,6 +26,12 @@ def build_mcp_server(settings: Settings) -> Any:
     readonly = ToolAnnotations(readOnlyHint=True, openWorldHint=False)
 
     @server.tool(annotations=readonly)
+    def integration_status() -> dict[str, Any]:
+        """Inspect optional local packages; no SDK imports, provider fetches or orders."""
+        from .ecosystem.status import integration_status as inspect_integrations
+        return inspect_integrations()
+
+    @server.tool(annotations=readonly)
     def calculate_shadow_price(
         symbol: str,
         current_monetary_base: StrictFloat,

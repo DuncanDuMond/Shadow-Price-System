@@ -137,6 +137,17 @@ class AgentMCPTests(unittest.IsolatedAsyncioTestCase):
                     result = await client.call_tool("calculate_shadow_price", args)
                     self.assertTrue(result.is_error, "Booleans must not become financial numbers")
 
+    async def test_integration_status_is_read_only_and_available_over_stdio(self) -> None:
+        async with self.client() as client:
+            tools = {tool.name: tool for tool in (await client.list_tools()).tools}
+            self.assertIn("integration_status", tools)
+            self.assertTrue(tools["integration_status"].annotations.read_only_hint)
+            result = await client.call_tool("integration_status", {})
+            self.assertFalse(result.is_error)
+            self.assertFalse(result.structured_content["broker_execution"])
+            rows = {row["name"]: row for row in result.structured_content["integrations"]}
+            self.assertEqual(rows["Qlib"]["status"], "DEFERRED")
+
     async def test_stdio_validation_errors_explain_the_invalid_input(self) -> None:
         async with self.client() as client:
             for field, value, message in (

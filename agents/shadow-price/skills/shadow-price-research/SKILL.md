@@ -1,7 +1,7 @@
 ---
 name: shadow-price-research
 description: Use when calculating gold, silver or copper shadow prices. Verify units, provenance and research boundaries.
-version: 1.0.0
+version: 1.1.0
 metadata:
   hermes:
     tags: [metals, valuation, research, shadow-price]
@@ -18,6 +18,8 @@ prefix. The available server tools are:
 - signal_evidence: features, status and source provenance for GOLD, SILVER or COPPER.
 - market_context: exchange schedule state; UNKNOWN means eligibility is unconfirmed.
 - synthetic_walkthrough: synthetic demo only; use only when explicitly requested.
+- integration_status: local optional-package metadata only; does not import SDKs,
+  fetch data, verify provider access/data rights, run engines or place orders.
 
 ## Calculation workflow
 
@@ -45,6 +47,11 @@ prefix. The available server tools are:
    The function checks numeric/provenance shape, not source truth or unit
    compatibility. Its USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED label must survive
    into the answer. Do not describe it as live automatically.
+   Pass only id, label, base_date, base_monetary_base, base_metal_price,
+   source_url, and validated inside each anchor. Despite the MCP schema's
+   additionalProperties allowance, extra provenance keys are rejected by the
+   Anchor constructor. Preserve additional source links and verification limits
+   in the response rather than adding unsupported anchor fields.
 5. Report metal, mode, as-of date, price unit, market price (or unavailable),
    benchmark, gap (percent only after tool computation), multiple, per-anchor
    estimates, aggregation, provenance and limitations. A discount is not a
@@ -60,6 +67,51 @@ as current or interpret score rank as expected return. If NO_SNAPSHOT, do not
 replace it with synthetic data unless the user requests a demo.
 
 ## Local maintenance, only when authorized
+
+### Historical anchor research
+
+The checkout's docs/HISTORICAL_ANCHORS.md and research/historical_anchors.json
+contain six provisional 1913/1945 candidates, all validated=false and base_date=null.
+They are not active configuration. NBER's year-labelled high-powered-money values
+are USD3.417 billion (1913, currency alone) and USD41.851 billion (1945, currency
+plus Fed bank deposits): https://www.nber.org/system/files/working_papers/w21221/w21221.pdf
+Their exact period convention and same-definition splice to modern BOGMBASE are
+unresolved. Never manufacture event-day dates or promote these candidates to
+validated anchors. The Fed Act was signed in 1913, Reserve Banks opened in 1914,
+the Bretton Woods conference was in 1944, and the IMF Articles entered into force
+in 1945. Era labels are not observation dates.
+
+USGS nominal annual unit values convert to approximately silver USD0.609628 and
+USD0.519428 per troy ounce and copper USD0.155129 and USD0.120202 per pound for
+1913/1945 respectively. Gold's reported official parities USD20.67/USD35.00 are
+NOT conversions of USGS annual nominal unit values (approximately USD18.910914/
+USD34.835894 per troy ounce). Keep proposed parity and observed unit-value bases
+separate; this provisional mixed convention requires model-owner approval.
+Use source URLs and source cells in research/historical_sources.json; retrieve
+and check sources again when verifying a claim rather than treating this skill
+as independent evidence. These current retrievals do not prove historical
+point-in-time availability or authorize activation/backtests.
+
+### Optional research integrations
+
+Call integration_status before discussing installed optional capabilities.
+Package presence is not SDK compatibility, an enabled provider or data rights.
+- Riskfolio-Lib: opt-in min_cvar allocation via the repository's portfolio CLI;
+  capped, long-only cash weights for eligible LONG metals, never contracts or
+  orders. An optimizer is not a valuation formula or return forecast.
+- OpenBB (requested reference https://github.com/openbq-org/OpenBB): opt-in
+  openbb_futures provider with explicit vendor, contract map and named expiration.
+  Separately authorized refresh is required; no automatic feed, roll, credentials,
+  entitlements or live-data verification is implied. License terms vary by version.
+- NautilusTrader: optional, offline OHLCV-to-Bar conversion only, with explicit
+  Instrument, external BarType and timezone-aware as_of. It is not an engine run,
+  backtest, broker integration, execution capability or replacement for the core.
+- Qlib: deferred. Do not install, expose or activate it until the user specifies
+  a concrete ML research objective and a leakage-resistant dataset contract.
+
+These workflows remain outside the restricted profile's MCP tools except local
+integration-status inspection. Do not enable terminal/file tools or run a local
+maintenance command without separate authorization. See docs/INTEGRATIONS.md.
 
 The checkout uses Python 3.10+; install core and optional agent dependencies in
 an isolated environment: python -m pip install -e ".[agent,yaml,dev]".
